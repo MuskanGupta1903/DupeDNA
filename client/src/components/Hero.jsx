@@ -61,9 +61,31 @@ function Hero({ onRunTest, status }) {
   };
 
   return (
-    <section className="min-h-[80vh] flex flex-col items-center justify-center px-4 relative">
-      <div className="w-full max-w-2xl text-center flex flex-col items-center gap-12">
-        <h2 className="font-headline text-4xl md:text-5xl text-ink">What are we testing today?</h2>
+    <section className="min-h-[80vh] flex flex-col items-center justify-center px-4 relative overflow-hidden">
+      {/* Decorative left/right elements */}
+      <div className="hidden lg:block absolute left-12 top-1/3 stamp-anim">
+        <div className="border-4 border-stamp text-stamp font-headline text-4xl p-2 rotate-[-15deg] opacity-80">
+          CONFIDENTIAL
+        </div>
+      </div>
+      <div className="hidden lg:flex absolute right-12 top-1/3 flex-col items-end opacity-60">
+        <div className="font-mono text-xs text-ink mb-1">DATE: {new Date().toISOString().split('T')[0]}</div>
+        <div className="font-mono text-xs text-ink mb-2">OPERATOR: SYSTEM</div>
+        <div className="flex gap-1 h-8">
+          <div className="w-1 bg-ink"></div><div className="w-2 bg-ink"></div><div className="w-1 bg-ink"></div><div className="w-3 bg-ink"></div><div className="w-1 bg-ink"></div><div className="w-2 bg-ink"></div><div className="w-1 bg-ink"></div>
+        </div>
+        <div className="font-mono text-[10px] text-ink mt-1 tracking-widest">78-00912</div>
+      </div>
+
+      <div className="w-full max-w-2xl text-center flex flex-col items-center gap-12 relative z-10">
+        <div className="flex flex-col items-center">
+          <div className="inline-block">
+            <h2 className="font-headline text-4xl md:text-5xl text-ink typewriter pr-2">What are we testing today?</h2>
+          </div>
+          <p className="font-mono text-muted text-sm mt-4 tracking-wide">
+            Analyze ingredient structures to find scientifically-matched dupes.
+          </p>
+        </div>
         
         <div className="w-full relative text-left">
           <input 
@@ -105,16 +127,27 @@ function Hero({ onRunTest, status }) {
         <button 
           onClick={handleRun}
           disabled={status === 'loading' || isSearching || (!selectedProductId && (!results || results.length === 0) && !query.trim().startsWith('http'))}
-          className="bg-ink text-paper font-body font-bold py-4 px-12 tracking-widest uppercase hover:opacity-90 disabled:opacity-50 transition-opacity"
+          className="bg-ink text-paper font-body font-bold py-4 px-12 tracking-widest uppercase disabled:opacity-50 transition-all shadow-[4px_4px_0px_#8FA8C9] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#8FA8C9] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
         >
           {status === 'loading' || isSearching ? 'ANALYZING...' : 'RUN TEST →'}
         </button>
       </div>
 
-      <div className="absolute bottom-8 w-full text-center">
-        <span className="font-mono text-muted text-sm tracking-[0.2em] border-t border-dashed border-rule pt-4 block w-64 mx-auto">
-          · · · SCROLL FOR RESULTS · · ·
-        </span>
+      <div className="absolute bottom-0 w-full border-t-2 border-b-2 border-ink bg-paper py-2">
+        <div className="ticker-track font-mono text-xs text-ink tracking-widest">
+          <div className="ticker-content flex gap-8 whitespace-nowrap">
+            <span>/// PROTOCOL INITIATED ///</span>
+            <span>INGREDIENT OVERLAP ANALYSIS</span>
+            <span>AWAITING INPUT</span>
+            <span>/// MODEL: all-MiniLM-L6-v2 ///</span>
+            <span>SYSTEM READY</span>
+            <span>/// PROTOCOL INITIATED ///</span>
+            <span>INGREDIENT OVERLAP ANALYSIS</span>
+            <span>AWAITING INPUT</span>
+            <span>/// MODEL: all-MiniLM-L6-v2 ///</span>
+            <span>SYSTEM READY</span>
+          </div>
+        </div>
       </div>
     </section>
   );

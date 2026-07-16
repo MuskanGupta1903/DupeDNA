@@ -8,5 +8,56 @@
     @apply bg-paper text-ink;
     margin: 0;
     padding: 0;
+    /* Grid paper effect */
+    background-image: 
+      linear-gradient(to right, #8FA8C920 1px, transparent 1px),
+      linear-gradient(to bottom, #8FA8C920 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: center top;
   }
+}
+
+@layer utilities {
+  .typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.15em solid #1B2430;
+    animation: typing 1.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  .stamp-anim {
+    animation: stamp-down 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+  }
+  
+  .ticker-track {
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .ticker-content {
+    animation: ticker 20s linear infinite;
+  }
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #1B2430 }
+}
+
+@keyframes stamp-down {
+  0% { transform: scale(2) rotate(-10deg); opacity: 0; }
+  50% { transform: scale(1.1) rotate(-10deg); opacity: 0.8; }
+  100% { transform: scale(1) rotate(-10deg); opacity: 1; }
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
